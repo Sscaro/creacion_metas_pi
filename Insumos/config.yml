@@ -1,0 +1,140 @@
+listado_insumos:
+  - 'Clientes_activos_Dir_Ind.xlsx' #0
+  - 'driver_Fuerza_portafolio.xlsx' #1
+  - 'drivers_transformados.xlsx' #2
+  - 'PortafolioInfaltable.xlsx' #3
+
+tablas_bd_pi_metas:
+  - Ventas # 0
+  - tabla_fuerza #1
+  - tabla_portafolio #2
+  - tabla_portafolio_au_td #3
+  - tabla_portafolio_bn_ce #4
+  - tabla_tipologias #5
+  - universo_directa #6
+  - universo_indirecta #7
+
+
+columnas_universos_dir: ## columnas de la tabla universo_directa
+  Cód. Cliente : cod_cliente
+  Nombre Cliente : nombre_cliente
+  Cód. Vendedor : cod_vendedor
+  Bloq. Pedido : bloque_pedido
+  Cód. Jefe Vtas: cod_jefe_ventas
+  Nombre Jefe Ventas: nombre_jefe_ventas
+
+lista_universo_ind: ## columnas de la tabla universo_indirecta
+  r_id_agente_comercial : clave_agente
+  cv_nombre_agente_comercial : nombre_agente
+  r_id_vendedor : cod_vendedor
+  r_id_cliente : codigo_ecom
+  Cod_CRM: cod_crm
+  Tipologia Aj: tipologia
+  Fuerzas en el rutero : fuerza
+
+driver_fuerza_portafolio:
+  driver_fuerza:
+    Cod_portafolio : Cod_portafolio
+    Codigo_Fuerza : Codigo_Fuerza
+  driver_portafolio:
+    Cod_Mat : Cod_Mat
+    Cod_portafolio : Cod_portafolio
+
+driver_transformados:
+  tipologia:
+    clave_tipologia: clave_tipologia
+    tipologia : tipologia
+    Canal_trans : canal_trans
+    Sub_canal_trans : sub_canal_trans
+  
+  segmento_valor:
+    Pequeño: AA
+    Medianno : AB
+    Grande: AC
+  
+estrato:
+  'Sin asignar' : Estrato Bajo
+  'Sin Asignar' : Estrato Bajo
+  'Sin Estrato' : Estrato Bajo
+  'Estrato 1': Estrato Bajo
+  'Estrato 2' : Estrato Bajo
+  'Estrato 3' : Estrato Bajo
+  'Estrato 4' : Estrato Alto
+  'Estrato 5' : Estrato Alto
+  'Estrato 6' : Estrato Alto
+
+portafolio:
+  portafolio_au_td:
+    Oficina de ventas: oficina_ventas
+    Canal Transformado : canal_trans
+    Sub Canal Transformado : sub_canal_trans
+    Segmento Transformado : segmento_trans
+    Tipología / Segmento 3 : tipologia
+    Material Meta : material_meta
+    Nombre Material Meta : nombre_material_meta
+    Categoría : categoria
+    Sub Categoría : sub_categoria
+    Línea : linea
+    Marca : marca
+    Segmento de Valor CRM : segmento_valor
+    Estrato : estrato
+    Material Impactos : material_impactos
+    Nombre Material Impactos : nombre_material_impactos
+    Excluir de Meta : excluir_metas
+    Innovación : innovacion
+
+  portafolio_bn_ce:
+    Oficina de ventas : oficina_ventas
+    Canal Transformado : canal_trans
+    Sub Canal Transformado : sub_canal_trans
+    Segmento Transformado : segmento_trans
+    Tipología / Segmento 3 : tipologia
+    Material Meta : material_meta
+    Nombre Material Meta : nombre_material_meta
+    Categoría : categoria
+    Sub Categoría : sub_categoria
+    Línea : linea
+    Marca : marca
+    Material Impactos : material_impactos
+    Nombre Material Impactos : nombre_material_impactos
+    Excluir de Meta : excluir_metas
+    Innovación : innovacion
+
+columnas_ventas:
+  Tipo de Venta - Texto : [tipo_venta,str]
+  Oficina de ventas - Clave : [clave_oficina_ventas,str]
+  Oficina de ventas : [oficina_ventas,str]
+  Agente Comercial - Clave : [cod_agente,]
+  Agente Comercial - Texto de longitud media : [nombre_agente,str]
+  Tipología / Segmento 3 - Clave : [clave_tipologia,str]
+  Tipología / Segmento 3 : [tipololgia,str]
+  Grupo de clientes 4 - Clave : [clave_segmento_vital,str]
+  Grupo de clientes 4 : [segmento_vital,str]
+  Cliente - Clave : [cod_cliente,str]
+  Cliente : [nombre_cliente,str]
+  Código ECOM : [cod_ecom,str]
+  Código Municpio : [cod_municipio,str]
+  Grupo de clientes 5 - Clave : [cod_cliente_5,str]
+  Grupo de clientes 5 : [cliente_5,str]
+  Estrato : [estrato,str]
+  Segmento de Valor CRM - Clave : [cod_segmento_valor,str]
+  Segmento de Valor CRM : [segmento_valor,str]
+  Jefe de Ventas Vendedor Dinámico - Clave : [cod_jefe_ventas,str]
+  Representante de Ventas Dinámico - Clave : [cod_vendedor,str]
+  Representante de Ventas Dinámico : [nombre_vendedor,str]
+  Sector - Clave : [clave_sector,str]
+  Sector: [sector,str]
+  Categoría (0MATERIAL__ZCATGORIA) - Clave : [clave_categoria,str]
+  Categoría (0MATERIAL__ZCATGORIA) : [categoria,str]
+  Sub Categoría - Clave : [clave_sub_categoria,str]
+  Sub Categoría : [sub_categoria,str]
+  Línea - Clave : [linea_clave,str]
+  Línea : [linea,]
+  Marca - Clave : [clave_marca,str]
+  Marca : [marca,]
+  Material - Clave : [cod_material,str]
+  Material : [material,str]
+  Año/Mes : [anio_mes,str]
+  Venta Neta Mes Actual $ : [venta_cop,int]
+  Venta Neta Mes Actual UN : [venta_un,float]
+  Venta Neta Mes Actual KG : [venta_kg,float]
