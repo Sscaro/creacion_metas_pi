@@ -6,11 +6,15 @@ from helpers.logging import get_my_logger # Importa la función de logging.
 from helpers.utils import cargar_config
 from helpers.utils import validate_columns
 from helpers.utils import engine
-#import pandas as pd
+
+import pandas as pd
 
 
 login = get_my_logger()
 config = cargar_config()
+
+
+
 class UpdateDriver:
     '''
     Clase para cargar cada insumo

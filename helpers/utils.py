@@ -148,4 +148,23 @@ def reducir_uso_memoria(df: pd.DataFrame) -> pd.DataFrame:
                     df[col] = df[col].astype(np.float64)
         else:
             df[col] = df[col].astype('category')
+    return df
 
+def agrupar_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Agrupa un DataFrame utilizando todas las columnas categóricas como claves 
+    y suma las columnas numéricas.
+    
+    Parámetros:
+        df (pd.DataFrame): El DataFrame a agrupar.
+    
+    Retorna:
+        pd.DataFrame: El DataFrame agrupado.
+    """
+    # Identificar columnas categóricas (tipo objeto)
+    columnas_categoricas = df.select_dtypes(include=['object', 'category']).columns.tolist()
+    
+    # Agrupar por columnas categóricas y sumar columnas numéricas
+    df_agrupado = df.groupby(columnas_categoricas, as_index=False).sum(numeric_only=True)
+    
+    return df_agrupado

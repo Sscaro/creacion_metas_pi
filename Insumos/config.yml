@@ -49,7 +49,7 @@ driver_transformados:
   
   segmento_valor:
     Pequeño: AA
-    Medianno : AB
+    Mediano : AB
     Grande: AC
   
 estrato:
@@ -104,7 +104,7 @@ columnas_ventas:
   Tipo de Venta - Texto : [tipo_venta,str]
   Oficina de ventas - Clave : [clave_oficina_ventas,str]
   Oficina de ventas : [oficina_ventas,str]
-  Agente Comercial - Clave : [cod_agente,]
+  Agente Comercial - Clave : [cod_agente,str]
   Agente Comercial - Texto de longitud media : [nombre_agente,str]
   Tipología / Segmento 3 - Clave : [clave_tipologia,str]
   Tipología / Segmento 3 : [tipololgia,str]
@@ -114,8 +114,8 @@ columnas_ventas:
   Cliente : [nombre_cliente,str]
   Código ECOM : [cod_ecom,str]
   Código Municpio : [cod_municipio,str]
-  Grupo de clientes 5 - Clave : [cod_cliente_5,str]
-  Grupo de clientes 5 : [cliente_5,str]
+  Grupo de clientes 5 - Clave : [cod_grupo_cliente_5,str]
+  Grupo de clientes 5 : [grupo_cliente_5,str]
   Estrato : [estrato,str]
   Segmento de Valor CRM - Clave : [cod_segmento_valor,str]
   Segmento de Valor CRM : [segmento_valor,str]
@@ -129,9 +129,9 @@ columnas_ventas:
   Sub Categoría - Clave : [clave_sub_categoria,str]
   Sub Categoría : [sub_categoria,str]
   Línea - Clave : [linea_clave,str]
-  Línea : [linea,]
+  Línea : [linea,str]
   Marca - Clave : [clave_marca,str]
-  Marca : [marca,]
+  Marca : [marca,str]
   Material - Clave : [cod_material,str]
   Material : [material,str]
   Año/Mes : [anio_mes,str]
