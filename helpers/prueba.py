@@ -1,9 +1,8 @@
-from helpers.utils import cargar_config
+import numpy as np
 
-config = cargar_config()
+lista1 = [1,2,3,4,5,6]
+lista2 = [0,1,2,3,5,8]
+lista3 = [1,3,6,10,15,21]
 
-ditio =  {elemento[0]: elemento[1] for elemento in config['columnas_ventas'].values()}
-
-valores = [nombre[0] for nombre in config['columnas_ventas'].values()]
-
-print(ditio)
+array_2D = np.array([lista1,lista2,lista3])
+print(array_2D[:,0:6:3])

@@ -24,3 +24,27 @@ ejecutar
 
 actualizar los driver:
     python -m modulos.actualiza_driver
+
+Nota Clientes bajo estos codigos de pedido no se tendran en cuenta para la meta:
+    01	No Compra
+    06	Por fallecimiento
+    08	Otras Listas Control
+    09	Lista Ctrol Corporat
+    10	Cliente en plan de p
+    11	Cliente en pre-jurid
+    12	Cliente en proceso j
+    13	Cliente Castigado CC
+    14	Proveed Castigado CP
+    15	Clientes en Ley 550
+    17	Cerro el Negocio
+    23	Lista Procuraduría
+    24	Lista ONU
+    26	Lista Estupefaciente
+    27	Cli.entr.a Indirecta
+    39	Cliente en Liquidaci
+
+imputaciones de los clientes vendedor sin portafolio
+    - se establece imputar con la moda aquellos vendedores que desde los universos no tienen portafolio
+        regla: moda entre agente comercial y vendedor mayor número de clientes en las fuerza de esta llave.
+        si aun continuan valores nulos se imputa con la fuerza generoca 208 MULTIMARCA MIXTO
+

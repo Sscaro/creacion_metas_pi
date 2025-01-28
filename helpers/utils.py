@@ -2,12 +2,13 @@
 Modulo con funciones auxiliares.
 '''
 import os
+import csv
 import numpy as np
 import pandas as pd
 import yaml
 import sqlalchemy
-import csv
 from io import StringIO
+
 
 config_bd= {   'DRIVER_NAME':'postgresql+psycopg2',
     'DB_USER_NAME':'postgres',
@@ -25,7 +26,18 @@ params_conexion = {
     'database': config_bd['DB_NAME']
 }
 
-
+'''
+params_conexion = {
+    'drivername':config['DRIVER_NAME'],
+    'username': config['DB_USER_NAME'],
+    'password': config['DB_PASSWORD'],
+    'host': config['DB_HOST'],
+    'port': config['DB_PORT'],
+    'database': config['DB_NAME']
+}
+print(params_conexion)
+quit()
+'''
 url = sqlalchemy.URL.create(
     drivername=params_conexion['drivername'],
     username=params_conexion['username'],

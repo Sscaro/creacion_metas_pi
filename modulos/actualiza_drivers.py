@@ -122,7 +122,7 @@ class UpdateDriver:
         cargar a la base de datos la tabla de pi ce bi
         '''
         result = self.__load_to_sql(config['portafolio']['portafolio_bn_ce'],config['listado_insumos'][3],config['tablas_bd_pi_metas'][4],hoja='Infaltable CE')
-        result = self.__load_to_sql(config['portafolio']['portafolio_bn_ce'],config['listado_insumos'][3],config['tablas_bd_pi_metas'][4],hoja='Infaltable CE',existe='append')
+        result = self.__load_to_sql(config['portafolio']['portafolio_bn_ce'],config['listado_insumos'][3],config['tablas_bd_pi_metas'][4],hoja='Infaltable B',existe='append')
         if result is True:
             return login.info(f"Actualización de la tabla {config['tablas_bd_pi_metas'][4]} exitosa")      
         else:
@@ -130,10 +130,10 @@ class UpdateDriver:
 
 
 actualizacion = UpdateDriver()
-actualizacion.cargar_directa()
-actualizacion.cargar_indirecta()
-actualizacion.cargar_fuerza_vend()
-actualizacion.cargar_portafolio_material()
-actualizacion.cargar_tipologia()
-actualizacion.cargar_pi_au_td()
+#actualizacion.cargar_directa()
+#actualizacion.cargar_indirecta()
+#actualizacion.cargar_fuerza_vend()
+#actualizacion.cargar_portafolio_material()
+#actualizacion.cargar_tipologia()
+#actualizacion.cargar_pi_au_td()
 actualizacion.cargar_pi_bn_ce()

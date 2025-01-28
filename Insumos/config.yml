@@ -16,7 +16,7 @@ tablas_bd_pi_metas:
 
 
 columnas_universos_dir: ## columnas de la tabla universo_directa
-  Cód. Cliente : cod_cliente
+  Cód. Cliente : cliente_clave
   Nombre Cliente : nombre_cliente
   Cód. Vendedor : cod_vendedor
   Bloq. Pedido : bloque_pedido
@@ -28,7 +28,7 @@ lista_universo_ind: ## columnas de la tabla universo_indirecta
   cv_nombre_agente_comercial : nombre_agente
   r_id_vendedor : cod_vendedor
   r_id_cliente : codigo_ecom
-  Cod_CRM: cod_crm
+  Cod_CRM: cliente_clave
   Tipologia Aj: tipologia
   Fuerzas en el rutero : fuerza
 
@@ -104,19 +104,19 @@ columnas_ventas:
   Tipo de Venta - Texto : [tipo_venta,str]
   Oficina de ventas - Clave : [clave_oficina_ventas,str]
   Oficina de ventas : [oficina_ventas,str]
-  Agente Comercial - Clave : [cod_agente,str]
+  Agente Comercial - Clave : [clave_agente,str]
   Agente Comercial - Texto de longitud media : [nombre_agente,str]
   Tipología / Segmento 3 - Clave : [clave_tipologia,str]
   Tipología / Segmento 3 : [tipololgia,str]
   Grupo de clientes 4 - Clave : [clave_segmento_vital,str]
   Grupo de clientes 4 : [segmento_vital,str]
-  Cliente - Clave : [cod_cliente,str]
+  Cliente - Clave : [cliente_clave,str]
   Cliente : [nombre_cliente,str]
   Código ECOM : [cod_ecom,str]
   Código Municpio : [cod_municipio,str]
-  Grupo de clientes 5 - Clave : [cod_grupo_cliente_5,str]
-  Grupo de clientes 5 : [grupo_cliente_5,str]
-  Estrato : [estrato,str]
+  Grupo de clientes 5 - Clave : [cod_grupo_cliente_5_orig,str]
+  Grupo de clientes 5 : [grupo_cliente_5_orig,str]
+  Estrato : [estrato_original,str]
   Segmento de Valor CRM - Clave : [cod_segmento_valor,str]
   Segmento de Valor CRM : [segmento_valor,str]
   Jefe de Ventas Vendedor Dinámico - Clave : [cod_jefe_ventas,str]
