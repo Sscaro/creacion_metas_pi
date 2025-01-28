@@ -1,3 +1,6 @@
+mes_meta: # SE DEBE MODIFICAR CADA MES CUIDADO!!!!
+   'ENE 2025'
+
 listado_insumos:
   - 'Clientes_activos_Dir_Ind.xlsx' #0
   - 'driver_Fuerza_portafolio.xlsx' #1
@@ -34,11 +37,11 @@ lista_universo_ind: ## columnas de la tabla universo_indirecta
 
 driver_fuerza_portafolio:
   driver_fuerza:
-    Cod_portafolio : Cod_portafolio
-    Codigo_Fuerza : Codigo_Fuerza
+    cod_portafolio : cod_portafolio
+    codigo_Fuerza : codigo_fuerza
   driver_portafolio:
-    Cod_Mat : Cod_Mat
-    Cod_portafolio : Cod_portafolio
+    cod_material : cod_material
+    cod_portafolio : cod_portafolio
 
 driver_transformados:
   tipologia:
@@ -107,7 +110,7 @@ columnas_ventas:
   Agente Comercial - Clave : [clave_agente,str]
   Agente Comercial - Texto de longitud media : [nombre_agente,str]
   Tipología / Segmento 3 - Clave : [clave_tipologia,str]
-  Tipología / Segmento 3 : [tipololgia,str]
+  Tipología / Segmento 3 : [tipologia,str]
   Grupo de clientes 4 - Clave : [clave_segmento_vital,str]
   Grupo de clientes 4 : [segmento_vital,str]
   Cliente - Clave : [cliente_clave,str]

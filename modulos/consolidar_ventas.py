@@ -105,12 +105,13 @@ class funciones_ventas:
         df_concatenado = pd.concat(dataframes, ignore_index=True)
         # extrae solo las columnas categoricas
         df_concatenado = agrupar_dataframe(df_concatenado)
-
+        print('filas y columnas del df consolidado')
+        print(df_concatenado.size)
         return df_concatenado
     
     def consolidar_ventas_dir(self):
         '''
-        Metodo para consolisar las ventas dela directa       
+        Metodo para consolidar las ventas dela directa       
         '''
         ventas_dir = self.__consolidar_ventas(tipo_venta='dir')
         return ventas_dir

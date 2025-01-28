@@ -4,6 +4,7 @@ Modulo para realizar ajustes y actualizaciones de las ventas
 import os
 from modulos.consolidar_ventas import funciones_ventas
 from modulos.ajustes_ventas import ajustes_ventas
+from modulos.cargar_bd_ventas import ingesta_ventas
 
 def run():
     '''
@@ -19,10 +20,13 @@ def run():
     objeto_ventas_ajuste = ajustes_ventas()
     
     ventas_dir_ajustadas = objeto_ventas_ajuste.ajustes_directa(ventas_directa)
-    ventas_ind_ajustadas = objeto_ventas_ajuste.ajustes_indirecta(ventas_indirecta)     
+    ventas_ind_ajustadas = objeto_ventas_ajuste.ajustes_indirecta(ventas_indirecta) 
+    ventas_consoldida = objeto_ventas_ajuste.ajustes_completos(ventas_dir_ajustadas,ventas_ind_ajustadas)
+    print(ventas_consoldida.isnull().sum())
+    objeto_ingesta = ingesta_ventas(ventas_consoldida)
+    objeto_ingesta.cargar_sql()
+    
 
-
-    #ventas_ind_ajustadas.to_csv('prueba_imputa1.csv',index=False,sep=";")
     return True
 
 
