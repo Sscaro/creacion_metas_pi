@@ -38,7 +38,7 @@ class ajustes_ventas:
         
         return df
 
-    def __cruce_df_lectura_vistas(self,df_base,query_vista,uniones):
+    def _cruce_df_lectura_vistas(self,df_base,query_vista,uniones):
         '''
         Metodo para realizar difernetes merges a partir de un data frame
         base y una data frame de una consulta a la bd en postgres
@@ -66,10 +66,10 @@ class ajustes_ventas:
         #el primer paso es eliminar las tipologias originales pues estan cambian y se parte de lo que esta en los universos.
         ventas_indirecta = ventas_indirecta.drop(columns=['clave_tipologia','tipologia'])
         query_activos = 'SELECT * FROM clientes_activos_indirecta'
-        df_ind = self.__cruce_df_lectura_vistas(ventas_indirecta,query_activos,['cliente_clave','clave_agente'])
+        df_ind = self._cruce_df_lectura_vistas(ventas_indirecta,query_activos,['cliente_clave','clave_agente'])
         
         query_portafolio_mat = 'SELECT * FROM tabla_portafolio'
-        df_ind = self.__cruce_df_lectura_vistas(df_ind,query_portafolio_mat,'cod_material')
+        df_ind = self._cruce_df_lectura_vistas(df_ind,query_portafolio_mat,'cod_material')
         
         df_ind = df_ind.drop(columns='cod_vendedor',axis=1)
         
@@ -92,7 +92,7 @@ class ajustes_ventas:
         '''
         ventas_directa = reducir_uso_memoria(ventas_directa)
         query_activos = 'SELECT * FROM clientes_activos_dir'
-        df_dir = self.__cruce_df_lectura_vistas(ventas_directa,query_activos,'cliente_clave')
+        df_dir = self._cruce_df_lectura_vistas(ventas_directa,query_activos,'cliente_clave')
         login.info('Ajustes de clientes activos de directa ')
         print(df_dir['venta_cop'].sum())
         return df_dir
@@ -111,17 +111,19 @@ class ajustes_ventas:
         ##query de vista con los transformados trae canal sub canal
                
         query_trans =  'SELECT * FROM vista_tipoligia'
-        data_anadido=  self.__cruce_df_lectura_vistas(data_anadido,query_trans,'clave_tipologia')
+        data_anadido=  self._cruce_df_lectura_vistas(data_anadido,query_trans,'clave_tipologia')
         ## imputando portafolio de AU
         query_pi_au_td = "SELECT * FROM portafolio_au_td"
-        data_anadido = self.__cruce_df_lectura_vistas(data_anadido,query_pi_au_td,
+        data_anadido = self._cruce_df_lectura_vistas(data_anadido,query_pi_au_td,
                                                       uniones=['cod_material','oficina_ventas','clave_tipologia','cod_grupo_cliente_5','estrato'])
         query_pi_bn_ce = "SELECT * FROM portafolio_bn_ce"
-        data_anadido = self.__cruce_df_lectura_vistas(data_anadido,query_pi_bn_ce,
+        data_anadido = self._cruce_df_lectura_vistas(data_anadido,query_pi_bn_ce,
                                                       uniones=['cod_material','oficina_ventas','clave_tipologia'])
         data_anadido["aplica_pi"] = data_anadido["pi_au_td"].combine_first(data_anadido["pi_bn_ce"])
         data_anadido = data_anadido.drop(columns=['pi_au_td','pi_bn_ce'])
         data_anadido['mes_meta'] = config['mes_meta']
+
+
         #data_anadido.to_csv('prueba_imputa1.csv',index=False)
         return data_anadido
         

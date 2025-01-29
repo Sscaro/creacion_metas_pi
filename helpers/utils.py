@@ -180,3 +180,19 @@ def agrupar_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df_agrupado = df.groupby(columnas_categoricas, as_index=False).sum(numeric_only=True)
     
     return df_agrupado
+
+
+def ajustes_clientes_num(df,col1, col2, valor:str="#"):
+    '''
+    funcion para ajustar los # en vendedores
+    arg: df, 
+        col1 = col con valor con valor en #. 
+        col2 = con con valor con cual imputar
+    return df
+    '''
+    # Crear un diccionario con el cod_cliente y su cod_vendedor real (que no sea '#')
+    valor_real = df[df[col1] != valor].groupby(col2)[col1].first()
+    df[col1] = df.apply(lambda row: valor_real[row[col2]] 
+                        if row[col1] == valor and row[col2] in valor_real 
+                        else row[col1], axis=1)
+    return df

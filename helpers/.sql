@@ -71,26 +71,49 @@ SELECT  oficina_ventas, clave_tipologia,
 	GROUP BY oficina_ventas, clave_tipologia;
 
 
+--/CONSULTA  CONTEOS DE IMPACTOS 
+SELECT tipo_venta, marcacion_ventas.oficina_ventas, 
+	cliente_clave,canal_trans,
+	sub_canal_trans, marcacion_ventas.tipologia,
+	clave_tipologia, 	
+	marcacion_ventas.estrato,
+	cod_grupo_cliente_5,
+	marcacion_ventas.grupo_cliente_5,
 
-SELECT tipo_venta, oficina_ventas, 
-	cod_vendedor,
-	cliente_clave, 
+	cod_vendedor,nombre_vendedor,	
 	CASE
-		WHEN tipo_venta = 'Directa' then cod_jefe_ventas ELSE clave_agente END AS cod_jefe_clave_agente,
-	nombre_agente,
-	anio_mes,
+	WHEN tipo_venta = 'Directa' then marcacion_ventas.cod_jefe_ventas ELSE clave_agente END AS cod_jefe_clave_agente,
+
+	CASE	
+	WHEN tipo_venta = 'Directa' then nombres_jfvtas.nombre_jefe_ventas ELSE nombre_agente END AS nombre_jefe_clave_agente,		
+	anio_mes,		
 	SUM(venta_cop) AS ventas_totales,
-	COALESCE(SUM(venta_cop * aplica_pi),0)  as ventas_pi,
-	count(distinct(cod_material)) AS Num_material_comprados,
-	COALESCE(sum(aplica_pi),0) AS Num_pi_comprados,
-	COALESCE(sum(aplica_pi),0)/ NULLIF(count(distinct(cod_material)),0) AS Porc_pi_compr,
-	CASE
-		WHEN COALESCE(sum(aplica_pi),0)/ NULLIF(count(distinct(cod_material)),0) < 0.4 THEN 0.08
-		WHEN COALESCE(sum(aplica_pi),0)/ NULLIF(count(distinct(cod_material)),0)  BETWEEN 0.4 AND 0.5 THEN 0.07
-		WHEN COALESCE(sum(aplica_pi),0)/ NULLIF(count(distinct(cod_material)),0)  BETWEEN 0.5 AND 0.6 THEN 0.06
-		ELSE 0.05 END AS porc_incremento	 
+	
+	COALESCE(SUM(venta_cop * aplica_pi),0)  as ventas_pi,	
+	
+	count(distinct
+		CASE WHEN venta_cop >0 
+		THEN (cod_material) END) AS Num_material_comprados,		
+	
+	COALESCE(sum(
+	CASE WHEN  venta_cop >0 
+	THEN (aplica_pi) END),0) AS Num_pi_comprados		 
+
+
 FROM public.marcacion_ventas
-	WHERE canal_trans in ('Tradicional','Autoservicios','Bienestar','Comercio Especializa','Otros Canales')	
-	AND tipologia <> 'Agente Comercial'
-	AND estado = 'Activo'
-group by tipo_venta, oficina_ventas ,cliente_clave, cod_vendedor ,cod_jefe_clave_agente,nombre_agente,anio_mes
+	LEFT JOIN nombres_jfvtas ON marcacion_ventas.cod_jefe_ventas = nombres_jfvtas.cod_jefe_ventas	
+	WHERE canal_trans in ('Tradicional','Autoservicios','Bienestar','Comercio Especializado','Otros Canales')	
+		AND marcacion_ventas.tipologia <> 'Agente Comercial'
+		AND marcacion_ventas.estado = 'Activo'	
+		AND mes_meta = 'ENE 2025'		
+				
+	group by tipo_venta, marcacion_ventas.oficina_ventas ,cliente_clave,canal_trans,
+	sub_canal_trans,clave_tipologia ,marcacion_ventas.tipologia, marcacion_ventas. estrato,cod_grupo_cliente_5,marcacion_ventas.grupo_cliente_5,
+	cod_vendedor,nombre_vendedor,	
+	cod_jefe_clave_agente,nombre_jefe_clave_agente,anio_mes
+
+--/TERMINA CONSULTA
+
+
+CREATE VIEW nombres_jfvtas AS
+select distinct(cod_jefe_ventas), nombre_jefe_ventas from public.universo_directa

@@ -19,11 +19,11 @@ activar proyecto:
 instalar librerias
     pip install -r requirements.txt
 
-ejecutar
-    python -m modulos.actualiza_drivers
-
 actualizar los driver:
     python -m modulos.actualiza_driver
+
+actualizar ventas 
+    python -m modulos.ventas
 
 Nota Clientes bajo estos codigos de pedido no se tendran en cuenta para la meta:
     01	No Compra
@@ -43,8 +43,17 @@ Nota Clientes bajo estos codigos de pedido no se tendran en cuenta para la meta:
     27	Cli.entr.a Indirecta
     39	Cliente en Liquidaci
 
+Notas: 
 imputaciones de los clientes vendedor sin portafolio
     - se establece imputar con la moda aquellos vendedores que desde los universos no tienen portafolio
         regla: moda entre agente comercial y vendedor mayor número de clientes en las fuerza de esta llave.
         si aun continuan valores nulos se imputa con la fuerza generoca 208 MULTIMARCA MIXTO
+- No se tiene en cuenta clientes para el calculo de la meta cuyo promedio en los meses bases sean inferior a 0
+- Se realiza calculo de las ventas tototales por clientes, pero los impactos solo aquellos con venta positiva
+- por el momoento no se tiene el num de referencia que aplica por cliente - vendedor
 
+Notas postgres
+- en el archivo .sql se encuentran el los querys de las vistas.
+- no realizar ningun replace, drop o delete a las tablas
+- Para actualizar las tablas todas excepto  marcacion_ventas se les debe hacer un reset
+- Ejecutar solo un mes a la vez para evitar problemas de momemoria insuficiente.
