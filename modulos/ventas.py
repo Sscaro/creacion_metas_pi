@@ -20,7 +20,7 @@ def run():
     objeto_ventas_ajuste = ajustes_ventas()
     
     ventas_dir_ajustadas = objeto_ventas_ajuste.ajustes_directa(ventas_directa)
-    ventas_ind_ajustadas = objeto_ventas_ajuste.ajustes_indirecta(ventas_indirecta) 
+    ventas_ind_ajustadas = objeto_ventas_ajuste.ajustes_indirecta(ventas_indirecta)
     ventas_consoldida = objeto_ventas_ajuste.ajustes_completos(ventas_dir_ajustadas,ventas_ind_ajustadas)
     print(ventas_consoldida.isnull().sum())
     
@@ -30,7 +30,6 @@ def run():
     objeto_ingesta.cargar_sql()  # cargar marcacion de cliente material en una tabla y cargar a una tabla en sql
     #objeto_ingesta.calculo_ajuste_metas() # ajustes de conteos para calculo meta.
     
-
     return True
 
 if __name__ == '__main__':

@@ -64,7 +64,7 @@ class ajustes_ventas:
         return df ajustado
         '''
         #el primer paso es eliminar las tipologias originales pues estan cambian y se parte de lo que esta en los universos.
-        ventas_indirecta = ventas_indirecta.drop(columns=['clave_tipologia','tipologia','oficina_ventas'])
+        ventas_indirecta = ventas_indirecta.drop(columns=['clave_tipologia','tipologia','oficina_ventas','cod_jefe_ventas'])
         query_activos = 'SELECT * FROM clientes_activos_indirecta'
         df_ind = self._cruce_df_lectura_vistas(ventas_indirecta,query_activos,['cliente_clave','clave_agente'])
         
