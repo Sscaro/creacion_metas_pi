@@ -122,13 +122,24 @@ class UpdateDriver:
             return login.info(f"Actualización de la tabla {config['tablas_bd_pi_metas'][4]} exitosa")      
         else:
            return login.warning("Error al actualizar la tabla %s", config['tablas_bd_pi_metas'][4])            
+    
+    def cargar_socios(self):
+        '''
+        cargar a la bd driver de portafolio vendedor
+        '''
+        result = self.__load_to_sql(config['columnas_maestra_socios'],config['listado_insumos'][4],config['tablas_bd_pi_metas'][8],hoja='consolidado',existe='append')
+        if result is True:
+            return login.info(f"Actualización de la tabla {config['tablas_bd_pi_metas'][8]} exitosa")      
+        else:
+           return login.warning("Error al actualizar la tabla %s", config['tablas_bd_pi_metas'][8])
 
 
 actualizacion = UpdateDriver()
-#actualizacion.cargar_directa()
-#actualizacion.cargar_indirecta()
+actualizacion.cargar_directa()
+actualizacion.cargar_indirecta()
 actualizacion.cargar_fuerza_vend()
 actualizacion.cargar_portafolio_material()
 actualizacion.cargar_tipologia()
 actualizacion.cargar_pi_au_td()
 actualizacion.cargar_pi_bn_ce()
+actualizacion.cargar_socios()

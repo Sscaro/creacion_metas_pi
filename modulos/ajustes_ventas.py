@@ -64,12 +64,15 @@ class ajustes_ventas:
         return df ajustado
         '''
         #el primer paso es eliminar las tipologias originales pues estan cambian y se parte de lo que esta en los universos.
-        ventas_indirecta = ventas_indirecta.drop(columns=['clave_tipologia','tipologia'])
+        ventas_indirecta = ventas_indirecta.drop(columns=['clave_tipologia','tipologia','oficina_ventas'])
         query_activos = 'SELECT * FROM clientes_activos_indirecta'
         df_ind = self._cruce_df_lectura_vistas(ventas_indirecta,query_activos,['cliente_clave','clave_agente'])
         
         query_portafolio_mat = 'SELECT * FROM tabla_portafolio'
         df_ind = self._cruce_df_lectura_vistas(df_ind,query_portafolio_mat,'cod_material')
+
+        query_oficina_agente = 'SELECT * FROM oficina_agentes'
+        df_ind = self._cruce_df_lectura_vistas(df_ind,query_oficina_agente,'clave_agente')
         
         df_ind = df_ind.drop(columns='cod_vendedor',axis=1)
         
@@ -112,6 +115,11 @@ class ajustes_ventas:
                
         query_trans =  'SELECT * FROM vista_tipoligia'
         data_anadido=  self._cruce_df_lectura_vistas(data_anadido,query_trans,'clave_tipologia')
+        
+        #imputa si el cliente es socio o no
+        query_socios = "SELECT * FROM public.clientes_socios"
+        data_anadido = self._cruce_df_lectura_vistas(data_anadido,query_socios,
+                                                      'cliente_clave')
         ## imputando portafolio de AU
         query_pi_au_td = "SELECT * FROM portafolio_au_td"
         data_anadido = self._cruce_df_lectura_vistas(data_anadido,query_pi_au_td,
@@ -119,11 +127,13 @@ class ajustes_ventas:
         query_pi_bn_ce = "SELECT * FROM portafolio_bn_ce"
         data_anadido = self._cruce_df_lectura_vistas(data_anadido,query_pi_bn_ce,
                                                       uniones=['cod_material','oficina_ventas','clave_tipologia'])
+      
+        
         data_anadido["aplica_pi"] = data_anadido["pi_au_td"].combine_first(data_anadido["pi_bn_ce"])
         data_anadido = data_anadido.drop(columns=['pi_au_td','pi_bn_ce'])
         data_anadido['mes_meta'] = config['mes_meta']
 
-
+        print(data_anadido.info())
         #data_anadido.to_csv('prueba_imputa1.csv',index=False)
         return data_anadido
         

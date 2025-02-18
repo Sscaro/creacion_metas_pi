@@ -1,11 +1,12 @@
 mes_meta: # SE DEBE MODIFICAR CADA MES CUIDADO!!!!
-   'ENE 2025'
+   'FEB 2025'
 
 listado_insumos:
   - 'Clientes_activos_Dir_Ind.xlsx' #0
   - 'driver_Fuerza_portafolio.xlsx' #1
   - 'drivers_transformados.xlsx' #2
   - 'PortafolioInfaltable.xlsx' #3
+  - 'maestra_socios.xlsx' #4
 
 tablas_bd_pi_metas:
   - Ventas # 0
@@ -16,7 +17,7 @@ tablas_bd_pi_metas:
   - tabla_tipologias #5
   - universo_directa #6
   - universo_indirecta #7
-
+  - maestra_socios #8
 
 columnas_universos_dir: ## columnas de la tabla universo_directa
   Cód. Cliente : cliente_clave
@@ -33,7 +34,10 @@ lista_universo_ind: ## columnas de la tabla universo_indirecta
   r_id_cliente : codigo_ecom
   Cod_CRM: cliente_clave
   Tipologia Aj: tipologia
+  Cod_jefe : cod_jefe_ventas
+  Nombre_jefe : nombre_jefe_ventas
   Fuerzas en el rutero : fuerza
+  Nom_oficina : oficina_ventas
 
 driver_fuerza_portafolio:
   driver_fuerza:
@@ -43,13 +47,24 @@ driver_fuerza_portafolio:
     cod_material : cod_material
     cod_portafolio : cod_portafolio
 
+columnas_maestra_socios:
+    Cod_Cliente : cod_cliente_ecom_sap
+    CRM Indirecta : cliente_clave
+    Cod_Agente : clave_agente
+    Nom_Agente : nombre_agente
+    Socio : socio
+
 driver_transformados:
   tipologia:
     clave_tipologia: clave_tipologia
     tipologia : tipologia
-    Canal_trans : canal_trans
-    Sub_canal_trans : sub_canal_trans
-  
+    clave_canal_trans : clave_canal_trans
+    canal_trans : canal_trans
+    clave_sub_canal_trans: clave_sub_canal_trans
+    sub_canal_trans: sub_canal_trans
+    cod_segmento: clave_segmento
+    segmento_trans: segmento_trans
+
   segmento_valor:
     Pequeño: AA
     Mediano : AB
@@ -114,7 +129,7 @@ columnas_ventas:
   Grupo de clientes 4 - Clave : [clave_segmento_vital,str]
   Grupo de clientes 4 : [segmento_vital,str]
   Cliente - Clave : [cliente_clave,str]
-  Cliente : [nombre_cliente,str]
+  Nombre Comercial : [nombre_cliente,str]
   Código ECOM : [cod_ecom,str]
   Código Municpio : [cod_municipio,str]
   Grupo de clientes 5 - Clave : [cod_grupo_cliente_5_orig,str]
@@ -141,3 +156,5 @@ columnas_ventas:
   Venta Neta Mes Actual $ : [venta_cop,int]
   Venta Neta Mes Actual UN : [venta_un,float]
   Venta Neta Mes Actual KG : [venta_kg,float]
+
+

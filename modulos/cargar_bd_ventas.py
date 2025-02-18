@@ -38,22 +38,30 @@ class ingesta_ventas:
     def calculo_ajuste_metas(self):
          query_calculo_pi= 'SELECT * FROM calculo_conteo_conteo'
          with engine.begin() as conn: # gestor de contextos de conexión a postgres
-              # Reemplaza con el nombre de tu vista
+              # Reemplazacalculo_ajuste_metas con el nombre de tu vista
             df_calulo_pi = pd.read_sql_query(query_calculo_pi, conn) 
+    
+           
             listacol = ['tipo_venta',
                         'oficina_ventas',
                         'cliente_clave',
+                        'nombre_cliente',
+                        'clave_agente',
+                        'nombre_agente',
+                        'cod_cliente_ecom',
                         'canal_trans',
                         'sub_canal_trans',
+                        'segmento_trans',                       
                         'tipologia',
                         'clave_tipologia',                   
                         'estrato',
                         'cod_grupo_cliente_5',
                         'grupo_cliente_5',
+                        'socio',
                         'cod_vendedor',
                         'nombre_vendedor',
-                        'cod_jefe_clave_agente',                 
-                        'nombre_jefe_clave_agente'
+                        'cod_jefe_ventas',                 
+                        'nombre_jefe_ventas'
                         ]
             
             valores = ['ventas_totales','ventas_pi','num_material_comprados','num_pi_comprados']
@@ -66,8 +74,8 @@ class ingesta_ventas:
             ### funciones para imputar algunos valores en # y algunos Sin asginar
             df_calulo_pi = ajustes_clientes_num(df_calulo_pi,col1='cod_vendedor',col2='cliente_clave')
             df_calulo_pi = ajustes_clientes_num(df_calulo_pi,col1='nombre_vendedor',col2='cliente_clave',valor = 'Sin asignar')
-            df_calulo_pi = ajustes_clientes_num(df_calulo_pi,col1='cod_jefe_clave_agente',col2='cliente_clave')
-            df_calulo_pi = ajustes_clientes_num(df_calulo_pi,col1='nombre_jefe_clave_agente',col2='cliente_clave',valor = 'Sin Asignar')
+            df_calulo_pi = ajustes_clientes_num(df_calulo_pi,col1='cod_jefe_ventas',col2='cliente_clave')
+            df_calulo_pi = ajustes_clientes_num(df_calulo_pi,col1='nombre_jefe_ventas',col2='cliente_clave',valor = 'Sin Asignar')
             ## agrupa los resultados
             df_calulo_pi = agrupar_dataframe(df_calulo_pi)  
 
@@ -86,8 +94,9 @@ class ingesta_ventas:
             print(df_calulo_pi.info())
             ## calculos para calcular los promedios entre los n meses que se utilicen para el calulo
             ## los variables estan juntass mes a mes. 
-            valor_incial= 14 # num_columna donde empiezan variables numericas para realizar los promedios (en este momento hay 2 meses s
-            valor_final = 15 # columna siguiente las columnas estan una junta a la otra
+           
+            valor_incial= 20 # num_columna donde empiezan variables numericas para realizar los promedios (en este momento hay 2 meses s
+            valor_final = 21 # columna siguiente las columnas estan una junta a la otra
 
             lista_columnas_promedio  = ['prom_ventas_cop','prom_ventas_pi_cop','prom_mate_unic_compr','prom_num_mate_pi_compr']
             for nuevacol in lista_columnas_promedio:
@@ -107,7 +116,7 @@ class ingesta_ventas:
             df_calulo_pi['porc_crecimiento'] = np.select(condiciones, valores, default=0.05)
             df_calulo_pi['ref_pi_incrementar'] = (df_calulo_pi['porc_crecimiento']*df_calulo_pi['prom_num_mate_pi_compr']).round(0).astype(int)
             df_calulo_pi['total_refe_mas_incremento'] = df_calulo_pi['ref_pi_incrementar']+df_calulo_pi['prom_num_mate_pi_compr']
-            df_calulo_pi.to_csv('calculo_final1.csv',index=False)        
+            df_calulo_pi.to_csv('calculo_final1.csv',index=False)       
             login.info("proceso culminado con exito.")
-
+           
             return True

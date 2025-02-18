@@ -28,7 +28,7 @@ class funciones_ventas:
         '''
         self.ruta = ruta
 
-    def __descomprimir(self):       
+    def __descomprimir(self):   
         '''
         Metodo para descomprimir los archivos de ventas
         '''
@@ -103,7 +103,7 @@ class funciones_ventas:
             login.info('resultado de la suma de las ventas es: {}'.format(validacion))
 
         df_concatenado = pd.concat(dataframes, ignore_index=True)
-        # extrae solo las columnas categoricas
+        # extrae solo las columnas categoricasf
         df_concatenado = agrupar_dataframe(df_concatenado)
         print('filas y columnas del df consolidado')
         print(df_concatenado.size)

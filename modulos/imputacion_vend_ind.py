@@ -68,5 +68,5 @@ class actualiza_vendedores:
         '''
         fuerza_porta = self.__combina_cliente_fuerza_portafolio()
        
-        resultado_ventas = pd.merge(self.df_ventas,fuerza_porta, on =['cliente_clave','clave_agente','cod_portafolio'],how='left') 
+        resultado_ventas = pd.merge(self.df_ventas,fuerza_porta, on =['cliente_clave','clave_agente','cod_portafolio'],how='left')
         return resultado_ventas
