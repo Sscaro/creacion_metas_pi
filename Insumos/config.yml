@@ -81,6 +81,21 @@ estrato:
   'Estrato 5' : Estrato Alto
   'Estrato 6' : Estrato Alto
 
+codigos_oficinas:
+  'R Oficina Central' : '00'
+  'R Bogota Norte' : '11'
+  'R Bucaramanga' : '12'
+  'R Cali' : '13'
+  'R Ibague': '14'
+  'R Medellin' : '16'
+  'R Altillano': '17'
+  'R Barranquilla': '20'
+  'R Cartagena': '23'
+  'R Pereira': '25'
+  'R General Nacional': 'R61'
+  'Sin asignar': '#'
+
+
 portafolio:
   portafolio_au_td:
     Oficina de ventas: oficina_ventas
@@ -158,3 +173,23 @@ columnas_ventas:
   Venta Neta Mes Actual KG : [venta_kg,float]
 
 
+
+nombres_mod_recom_AU_TD:
+  - PRODUCT_ID
+  - SALES_OFFICE_ID
+  - CUST_TYPE_ID 
+  - DIST_CHANNEL_TRANS
+  - SUB_DIST_CHAN_TRANS 
+  - TIPOL_TRANS 
+  - CUST_GROUP5
+  - STRATUM_GROUPED 
+  - SECTOR_ID
+
+nombres_mod_recom_bn_ce:
+  - PRODUCT_ID
+  - SALES_OFFICE_ID
+  - CUST_TYPE_ID 
+  - DIST_CHANNEL_TRANS
+  - SUB_DIST_CHAN_TRANS 
+  - TIPOL_TRANS 
+  - SECTOR_ID

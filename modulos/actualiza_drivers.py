@@ -11,8 +11,6 @@ from helpers.utils import engine
 login = get_my_logger()
 config = cargar_config()
 
-
-
 class UpdateDriver:
     '''
     Clase para cargar cada insumo
@@ -135,11 +133,11 @@ class UpdateDriver:
 
 
 actualizacion = UpdateDriver()
-actualizacion.cargar_directa()
-actualizacion.cargar_indirecta()
-actualizacion.cargar_fuerza_vend()
-actualizacion.cargar_portafolio_material()
+#actualizacion.cargar_directa()
+#actualizacion.cargar_indirecta()
+#actualizacion.cargar_fuerza_vend()
+#actualizacion.cargar_portafolio_material()
 actualizacion.cargar_tipologia()
-actualizacion.cargar_pi_au_td()
-actualizacion.cargar_pi_bn_ce()
-actualizacion.cargar_socios()
+#actualizacion.cargar_pi_au_td()
+#actualizacion.cargar_pi_bn_ce()
+#actualizacion.cargar_socios()

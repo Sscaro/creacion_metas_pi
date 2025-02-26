@@ -64,3 +64,37 @@ select distinct(cod_jefe_ventas), nombre_jefe_ventas from public.universo_direct
 CREATE VIEW oficina_agentes AS
 SELECT distinct(clave_agente), oficina_ventas FROM universo_indirecta
 
+/*
+VISTA PARA RECOMENDADOS AU Y TD
+ */
+
+CREATE VIEW recomen_Au_td AS(
+ SELECT DISTINCT tabla_portafolio_au_td.material_impactos AS material_cod,
+    tabla_portafolio_au_td.oficina_ventas,
+    tabla_tipologias.clave_tipologia,
+	tabla_tipologias.clave_canal_trans,
+	tabla_tipologias.clave_sub_canal_trans,
+	tabla_tipologias.clave_segmento,
+        CASE
+            WHEN tabla_portafolio_au_td.segmento_valor = 'Grande'::text THEN 'AC'::text
+            WHEN tabla_portafolio_au_td.segmento_valor = 'Mediano'::text THEN 'AB'::text
+            ELSE 'AA'::text
+        END AS cod_grupo_cliente_5,
+    tabla_portafolio_au_td.estrato
+   FROM tabla_portafolio_au_td
+    LEFT JOIN tabla_tipologias ON tabla_portafolio_au_td.tipologia = tabla_tipologias.tipologia
+
+/*
+VISTA PARA RECOMENDADOS BN Y TCE
+ */
+
+CREATE VIEW recomen_bn_ce AS (
+SELECT DISTINCT tabla_portafolio_bn_ce.material_impactos AS cod_material,
+    tabla_portafolio_bn_ce.oficina_ventas,
+    tabla_tipologias.clave_tipologia,
+	tabla_tipologias.clave_canal_trans,
+	tabla_tipologias.clave_sub_canal_trans,
+	tabla_tipologias.clave_segmento
+   FROM tabla_portafolio_bn_ce
+     LEFT JOIN tabla_tipologias ON tabla_portafolio_bn_ce.tipologia = tabla_tipologias.tipologia
+)
