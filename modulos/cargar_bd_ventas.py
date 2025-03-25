@@ -5,6 +5,7 @@ y ejectuar algunas consultas para el calculo de pi
 import pandas as pd
 import numpy as np
 from helpers.utils import engine, psql_insert_copy
+
 from helpers.logging import get_my_logger
 from helpers.utils import cargar_config, agrupar_dataframe, ajustes_clientes_num
 from modulos.ajustes_ventas import ajustes_ventas
@@ -93,7 +94,7 @@ class ingesta_ventas:
             df_calulo_pi = df_calulo_pi.drop(columns=['num_pi_aplica','num_aplica_bn_ce'])
             print(df_calulo_pi.info())
             ## calculos para calcular los promedios entre los n meses que se utilicen para el calulo
-            ## los variables estan juntass mes a mes. 
+            ## los variables estan juntass mes a mes.
            
             valor_incial= 20 # num_columna donde empiezan variables numericas para realizar los promedios (en este momento hay 2 meses s
             valor_final = 21 # columna siguiente las columnas estan una junta a la otra
@@ -116,7 +117,17 @@ class ingesta_ventas:
             df_calulo_pi['porc_crecimiento'] = np.select(condiciones, valores, default=0.05)
             df_calulo_pi['ref_pi_incrementar'] = (df_calulo_pi['porc_crecimiento']*df_calulo_pi['prom_num_mate_pi_compr']).round(0).astype(int)
             df_calulo_pi['total_refe_mas_incremento'] = df_calulo_pi['ref_pi_incrementar']+df_calulo_pi['prom_num_mate_pi_compr']
-            df_calulo_pi.to_csv('calculo_final1.csv',index=False)       
+           
+            ##filtros del archivos de configuración
+            filtro_metas_final = config.get("filtro_metas_final", {})
+            mascara = pd.Series(True, index=df_calulo_pi.index)  # Inicializar máscara en True
+            for columna, valores_excluir in filtro_metas_final.items():
+                if columna in df_calulo_pi.columns:  # Solo aplicar si la columna existe en el DataFrame
+                    mascara &= ~df_calulo_pi[columna].isin(valores_excluir)
+           
+            df_filtrado = df_calulo_pi[mascara]
+
+            df_filtrado.to_csv('calculo_final1.csv',index=False)       
             login.info("proceso culminado con exito.")
            
             return True

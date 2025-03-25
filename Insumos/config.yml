@@ -1,5 +1,26 @@
 mes_meta: # SE DEBE MODIFICAR CADA MES CUIDADO!!!!
-   'FEB 2025'
+   'ABR 2025'
+
+filtro_metas_final:
+  cod_vendedor:  # vendedores genericos
+    - "#"
+    - 3828
+    - 2991
+    - 2991
+    - 2996
+    - 2951
+    - 2991
+    - 3828
+    - 2992
+    - 2997
+    - 2995
+
+  cod_jefe_ventas:
+   - 3692 # ANDRES BAUTISTA
+   - 2973 # CARLOS NIETO 
+   - 3150 # JAIME ARBOLEDA
+   - 16695 #HENRY PAEZ
+  
 
 listado_insumos:
   - 'Clientes_activos_Dir_Ind.xlsx' #0
@@ -7,6 +28,8 @@ listado_insumos:
   - 'drivers_transformados.xlsx' #2
   - 'PortafolioInfaltable.xlsx' #3
   - 'maestra_socios.xlsx' #4
+  - 'base.xlsx' # 5 promos
+  
 
 tablas_bd_pi_metas:
   - Ventas # 0
@@ -95,7 +118,6 @@ codigos_oficinas:
   'R General Nacional': 'R61'
   'Sin asignar': '#'
 
-
 portafolio:
   portafolio_au_td:
     Oficina de ventas: oficina_ventas
@@ -171,8 +193,6 @@ columnas_ventas:
   Venta Neta Mes Actual $ : [venta_cop,int]
   Venta Neta Mes Actual UN : [venta_un,float]
   Venta Neta Mes Actual KG : [venta_kg,float]
-
-
 
 nombres_mod_recom_AU_TD:
   - PRODUCT_ID

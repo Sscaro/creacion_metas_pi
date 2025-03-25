@@ -84,7 +84,7 @@ class modelo_recomendacion:
         login.info("Ajustes de portafolio AU_TD realizados.")
         login.info("Dimensiones de la tabla ajustada: %s", df_portafolio_AU_TD.shape)
         df_portafolio_AU_TD.columns = config['nombres_mod_recom_AU_TD']
-        
+   
         return df_portafolio_AU_TD
     
     def ajustes_portafolio_bn_cd(self):
@@ -110,7 +110,6 @@ class modelo_recomendacion:
         '''
         Metodo para calular el archivo de pedido sugerido
         return df
-
         '''
         porta_au_td  = self.ajustes_portafolio_au_td()
         porta_bn_ce =  self.ajustes_portafolio_bn_cd()
@@ -149,9 +148,8 @@ class modelo_recomendacion:
 
 
 objeto = modelo_recomendacion()
-
-        
-
+data_recomendado = objeto.archivo_pedido_sugerido()
+data_recomendado.to_csv('data_recomendado.csv',index=False)
 
 
 

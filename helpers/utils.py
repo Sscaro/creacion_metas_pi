@@ -9,6 +9,14 @@ import yaml
 import sqlalchemy
 from io import StringIO
 
+'''
+config_bd= {   'DRIVER_NAME':'postgresql+psycopg2',
+    'DB_USER_NAME':'postgres',
+    'DB_PASSWORD': '&t45JPpaY9Qw',
+    'DB_HOST':'10.26.8.98',
+    'DB_PORT':'5432',
+    'DB_NAME':'portafolio_infaltable'}
+'''
 
 config_bd= {   'DRIVER_NAME':'postgresql+psycopg2',
     'DB_USER_NAME':'postgres',
@@ -38,6 +46,7 @@ params_conexion = {
 print(params_conexion)
 quit()
 '''
+
 url = sqlalchemy.URL.create(
     drivername=params_conexion['drivername'],
     username=params_conexion['username'],
@@ -192,7 +201,7 @@ def ajustes_clientes_num(df,col1, col2, valor:str="#"):
     '''
     # Crear un diccionario con el cod_cliente y su cod_vendedor real (que no sea '#')
     valor_real = df[df[col1] != valor].groupby(col2)[col1].first()
-    df[col1] = df.apply(lambda row: valor_real[row[col2]] 
-                        if row[col1] == valor and row[col2] in valor_real 
+    df[col1] = df.apply(lambda row: valor_real[row[col2]]
+                        if row[col1] == valor and row[col2] in valor_real
                         else row[col1], axis=1)
     return df

@@ -7,7 +7,6 @@ from helpers.utils import cargar_config
 from helpers.utils import validate_columns
 from helpers.utils import engine
 
-
 login = get_my_logger()
 config = cargar_config()
 
@@ -132,12 +131,14 @@ class UpdateDriver:
            return login.warning("Error al actualizar la tabla %s", config['tablas_bd_pi_metas'][8])
 
 
+
+
 actualizacion = UpdateDriver()
-#actualizacion.cargar_directa()
-#actualizacion.cargar_indirecta()
-#actualizacion.cargar_fuerza_vend()
-#actualizacion.cargar_portafolio_material()
+actualizacion.cargar_directa()
+actualizacion.cargar_indirecta()
+actualizacion.cargar_fuerza_vend()
+actualizacion.cargar_portafolio_material()
 actualizacion.cargar_tipologia()
-#actualizacion.cargar_pi_au_td()
-#actualizacion.cargar_pi_bn_ce()
-#actualizacion.cargar_socios()
+actualizacion.cargar_pi_au_td()
+actualizacion.cargar_pi_bn_ce()
+actualizacion.cargar_socios()  
